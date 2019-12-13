@@ -18,10 +18,10 @@
         </ul>
     </nav>
     <div class="container">
-        <ul v-for="(article, index) of articles.reverse()" :key="article.id">
+        <ul v-for="article of articles" :key="article.id">
             <li>
                 <a :href="`${article.url}`">
-                    <div class="news" :class="{ 'active': index === 100 }">
+                    <div class="news">
                         <div class="news-image">
                             <img :src="`${article.imagem}`" alt="">
                         </div>
@@ -37,7 +37,6 @@
                         </div>
                     </div>
                 </a>
-                <!-- <button style="background-color: white; border: none; font-size: 20px; position: absoute;" type="submit" title="Remover" @click="removerDaLista(article.id ,article.titulo, article.url, article.imagem, article.data)"><img src="https://img.icons8.com/material/24/000000/filled-trash.png"></button> -->
             </li>
             
         </ul>
@@ -47,7 +46,6 @@
 
 <script>
 /*eslint-disable */
-import Data from './../services/data'
 import LerMaisTarde from './../services/lerMaisTarde'
 import Noticia from '../models/noticiaRemover'
 
@@ -62,15 +60,6 @@ export default {
       console.log(res.data)
       this.articles = res.data;
     })
-  },
-  methods: {
-       removerDaLista: function(id,titulo,url,imagem, data) {
-          var noticiaObj = new Noticia(id, titulo, url, imagem, data);
-          console.log(noticiaObj);
-          LerMaisTarde.remover(noticiaObj).then(res => {
-            // this.$router.push('/salvo')
-        })
-      }
   }
 }
 
